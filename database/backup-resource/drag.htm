@@ -1,0 +1,115 @@
+<style>
+    .tinyAddText{
+        position: absolute;
+        min-width: 100px;
+        outline: none;
+    }
+    .tinyAddText:hover, .tinyAddText:focus{
+        border: 1px dashed #888;
+    }
+    
+    .target{
+        background: transparent;
+        width: 40%;
+        height: 250px;
+        float: left;
+        margin-right: 15px;
+        overflow: hidden;
+        transition: 0.2s;
+        position: relative;
+    }
+    .target:before{
+        content: "Drag Here";
+        text-align: center;
+        position: absolute;
+        top: 45%;
+        right: 0;
+        left: 0;
+        margin: auto;
+    }
+    .target:hover{
+        border: 1px solid #ccc;
+    }
+    .card-image{
+        margin-top: 10px;
+        display: block;
+    }
+    .imgDrag{
+        display: inline-block;
+    }
+    
+    .imgDrag [class*="mdi-"]{
+        position: absolute;
+        top: 5px;
+        right: 6px;
+        font-size: 1.2rem;
+        color: #fff;
+        cursor: pointer;
+        border: 1px solid #000;
+        border-radius: 100%;
+        padding: 0px 5px;
+        display: none;
+    }
+    
+    .resizing [class*="mdi-"]{
+        display: block !important;
+    }
+    
+    .imgLoading{
+        opacity: 0.5 !important;
+        cursor: wait;
+    }
+    .tinyDragging{
+        float: left;
+        display: inline-block;
+        position: relative;
+        z-index: 10;
+    }
+    .tinyDragging + .tinyDragging{
+        margin-left: 20px;
+    }
+    .tinyDragging i{
+        position: absolute;
+        color: #F2F2F2;
+        font-weight: bold;
+        font-size: 16px;
+        right: 5px;
+        cursor: pointer;
+        transition: all 0.3s
+    }
+    .tinyDragging i:hover{
+        font-size: 20px;
+        color: #fff
+    }
+    .tinyProcess{
+        position: absolute;
+        bottom: -10px;
+    }
+</style>
+
+<div tiny-drag-target="true" x-on-drop="tinydropped(xEl, dEl, index)" class="target">
+    <div class="tinyAddText" tiny-drag="false" contenteditable="true"></div>
+</div>
+<div tiny-drag-target="true" x-on-drop="tinydropped(xEl, dEl, index)" class="target"></div>
+
+<div class="clearfix"></div>
+<div class="card-image" id="image_content">
+    <div ng-repeat="image in images" class="tinyDragging">
+        <img class="responsive-img" origin-src="{{image.origin}}" style="width: 100px; height: 90px;" id="{{image.id !== undefined ? image.id : 'imagess'+$index}}" data-index="{{$index}}" data-path="{{image.path}}" tiny-drag="true" ng-src="{{image.src}}" tiny-show="image.show" />
+    </div>
+</div>
+<div class="clearfix"></div>
+<button x-on-addfile="onAddfile(up, files)" is-drag="true" x-on-uploaded="onUploaded(respon, file)" folder="yuyu/phuong" tiny-upload="true" class="waves-effect waves-light btn">Add Image</button>
+
+<h1>{{images.length}} <small>{{status}}</small></h1>
+
+<div id="console"></div>
+<script>
+    $(document).ready(function(){
+        $(document).on('click', function(e){
+            if(!$(e.target).hasClass('target') && !$(e.target).hasClass('resizing')){
+                $('.resizing').resizable('destroy').removeClass('resizing');   
+            }
+        });
+    })
+</script>

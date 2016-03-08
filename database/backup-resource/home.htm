@@ -1,0 +1,84 @@
+<div class="row">
+  <form name="form" autocomplete="off" class="col s12" tiny-submit="submit(dataForm)">
+    <div class="row">
+      <div class="input-field col m6 s12">
+        <input id="first_name" name="first_name" type="text" autocomplete="off" class="validate">
+        <label for="first_name">First Name</label>
+      </div>
+      <div class="input-field col m6 s12">
+        <input id="last_name" name="last_name" type="text" autocomplete="off" class="validate">
+        <label for="last_name">Last Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="username" name="username" type="text" autocomplete="off" class="validate">
+        <label for="username">Username</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="password" name="password" type="password" autocomplete="off" class="validate">
+        <label for="password">Password</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" name="uemail" ng-model="emailgfd" required="" type="email" autocomplete="off" class="validate">
+        <label for="email">Email</label>
+      </div>
+      <div ng-show="form.$submitted || form.uemail.$touched">
+          <span ng-show="form.uemail.$error.required">Tell us your email.</span>
+          <span ng-show="form.uemail.$error.email">This is not a valid email.</span>
+      </div>
+    </div>
+    <button type="submit" id="download-button" class="btn-large waves-effect waves-light">Get Started</button>
+  </form>
+</div>
+
+
+<!-- Modal Trigger -->
+<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+<!-- Modal Structure -->
+<div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a onclick="Materialize.toast('I am a toast', 4000)" href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Agree</a>
+    </div>
+</div>
+
+<!--- Alert --->
+<a class="waves-effect waves-light btn" id="alert">Alert</a>
+
+<!--- Alert --->
+<a class="waves-effect waves-light btn" ng-click="alert('Test Alert on Angluar', 'Tester')">Alert on Angular</a>
+
+<script>
+<!--
+$(document).ready(function(){
+    $('.modal-trigger').leanModal();
+    $('#alert').click(function(){
+        var content= "This is a example content. You can changed this content. And you can add HTML content. <b>fdsfdsf</b> ";
+
+        var $popup = $(this).DialogModal({
+        	theme			:"default",
+        	style			:"white",
+        	overlay			:true,
+        	overlaycolor		:"#000",
+        	overlayopacity		:0.5,
+        	closeoverlay		:true,
+        	closebutton		:true,
+        	title			:"My Dialog Window",
+        	content			:content,
+        	width			:400,
+        	radius			:0,
+        	draggable		:false,
+        	buttons			:[{label:"Button", class:"waves-effect waves-teal btn-flat", action:function(){ console.log($popup); }},
+        ]});
+    })
+});  
+-->
+</script>
